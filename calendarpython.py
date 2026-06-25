@@ -112,4 +112,3 @@ if __name__ == "__main__":
     with open(OUTPUT_FILE, "wb") as f:
         f.write(cal.to_ical())
     print(f"Written to {OUTPUT_FILE}")
-c
