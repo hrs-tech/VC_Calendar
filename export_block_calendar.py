@@ -104,14 +104,15 @@ def build_block_calendar(school_route, token, start_date, end_date, debug=True):
     block_schedules = api_get(school_route, token, "/academics/config/block_schedules")
     bs_df = pd.DataFrame(block_schedules)
 
-    # 4. Pull block definitions (times, descriptions)
+    # 4. Pull block definitions (names only — no times, per your last debug output)
     blocks = api_get(school_route, token, "/academics/config/blocks")
     blk_df = pd.DataFrame(blocks)
 
+    # 5. Pull block TIMES — this is where start/end times almost certainly live
+    block_times = api_get(school_route, token, "/academics/config/block_times")
+    bt_df = pd.DataFrame(block_times)
+
     if debug:
-        # These print statements are the fastest way to confirm real field
-        # names/shapes returned by your school's instance. Once you've
-        # confirmed the joins below work, you can delete this block.
         print("--- calendar_rotation_days columns ---")
         print(rd_df.columns.tolist())
         print("--- rotation_days columns ---")
@@ -120,28 +121,27 @@ def build_block_calendar(school_route, token, start_date, end_date, debug=True):
         print(bs_df.columns.tolist())
         print("--- blocks columns ---")
         print(blk_df.columns.tolist())
+        print("--- block_times columns ---")
+        print(bt_df.columns.tolist())
+        print("--- block_times sample row ---")
+        if len(bt_df) > 0:
+            print(bt_df.iloc[0].to_dict())
 
-    # 5. Join calendar day -> rotation label
-    merged = rd_df.copy()
-    if "rotation_id" in merged.columns and "id" in rot_df.columns:
-        merged = merged.merge(
-            rot_df, left_on="rotation_id", right_on="id", suffixes=("", "_rotation")
-        )
+    # 5. Flatten the nested dict columns Veracross returns inline
+    #    (rotation, day, block_schedule each come back as {'id':.., 'description':..})
+    for col in ["rotation", "day", "block_schedule"]:
+        if col in rd_df.columns:
+            expanded = pd.json_normalize(rd_df[col]).add_prefix(f"{col}_")
+            rd_df = pd.concat(
+                [rd_df.drop(columns=[col]).reset_index(drop=True), expanded], axis=1
+            )
 
-    # 6. Join calendar day -> block schedule -> blocks meeting on it.
-    #    NOTE: whether "blocks" links to "block_schedules" via a shared
-    #    block_schedule_id, or blocks are nested inside the block_schedule
-    #    response, depends on your school's config — check the printed
-    #    columns above and adjust this join accordingly.
-    if "block_schedule_id" in merged.columns and "block_schedule_id" in blk_df.columns:
-        merged = merged.merge(
-            blk_df, on="block_schedule_id", suffixes=("", "_block"), how="left"
-        )
-    elif "block_schedule_id" in merged.columns and "id" in bs_df.columns:
-        merged = merged.merge(
-            bs_df, left_on="block_schedule_id", right_on="id",
-            suffixes=("", "_schedule"), how="left",
-        )
+    # NOTE: we don't yet know how block_times links back to a specific
+    # calendar day (via block_schedule_id? day_id? both?), so for now we
+    # return the flattened rotation-day table only. Once we see the
+    # block_times columns/sample printed above, the final merge gets added
+    # here.
+    merged = rd_df
 
     return merged
 
