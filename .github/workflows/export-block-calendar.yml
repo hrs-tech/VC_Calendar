@@ -1,0 +1,31 @@
+name: Export Block Calendar
+
+on:
+  workflow_dispatch:   # lets you trigger it manually from the Actions tab
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run export
+        env:
+          VC_SCHOOL_ROUTE: ${{ secrets.VC_SCHOOL_ROUTE }}
+          VC_CLIENT_ID: ${{ secrets.VC_CLIENT_ID }}
+          VC_CLIENT_SECRET: ${{ secrets.VC_CLIENT_SECRET }}
+        run: python export_block_calendar.py --start 2026-08-01 --end 2027-06-30 --out blocks.csv
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: block-calendar
+          path: blocks.csv
