@@ -24,11 +24,17 @@ import pandas as pd
 
 BASE_URL = "https://api.veracross.com/{school_route}/v3"
 
-# Scopes needed for this script — add these to your OAuth app in
-# Identity & Access Management if they aren't there already.
+# Scopes needed for this script — confirmed against your IAM OAuth app's
+# enabled scopes list.
 SCOPES = (
     "academics.calendar_rotation_days:list "
-    "academics.configuration.block_schedules:list"
+    "academics.calendar_rotation_days:read "
+    "academics.config.block_schedules:list "
+    "academics.config.block_schedules:read "
+    "academics.config.blocks:list "
+    "academics.config.blocks:read "
+    "academics.config.rotation_days:list "
+    "academics.config.rotation_days:read"
 )
 
 
@@ -71,8 +77,9 @@ def api_get(school_route, token, path, params=None):
     return results
 
 
-def build_block_calendar(school_route, token, start_date, end_date):
+def build_block_calendar(school_route, token, start_date, end_date, debug=True):
     # 1. Pull every calendar rotation day in the date range
+    #    (date -> which rotation_id and/or block_schedule_id applies)
     rotation_days = api_get(
         school_route,
         token,
@@ -81,40 +88,54 @@ def build_block_calendar(school_route, token, start_date, end_date):
     )
     rd_df = pd.DataFrame(rotation_days)
 
-    # 2. Pull every block schedule definition (id -> blocks/times) once
-    block_schedules = api_get(
-        school_route, token, "/academics/configuration/block_schedules"
-    )
+    # 2. Pull rotation day definitions (id -> "A", "B", "C" label)
+    rotation_defs = api_get(school_route, token, "/academics/config/rotation_days")
+    rot_df = pd.DataFrame(rotation_defs)
+
+    # 3. Pull block schedule definitions
+    block_schedules = api_get(school_route, token, "/academics/config/block_schedules")
     bs_df = pd.DataFrame(block_schedules)
 
-    # block_schedules typically embed a "blocks" list per schedule; explode it
-    # so each row becomes one block occurrence on that schedule.
-    bs_df = bs_df.explode("blocks").reset_index(drop=True)
-    block_cols = pd.json_normalize(bs_df["blocks"]).add_prefix("block_")
-    bs_expanded = pd.concat(
-        [bs_df.drop(columns=["blocks"]).reset_index(drop=True), block_cols], axis=1
-    )
+    # 4. Pull block definitions (times, descriptions)
+    blocks = api_get(school_route, token, "/academics/config/blocks")
+    blk_df = pd.DataFrame(blocks)
 
-    # 3. Join calendar day -> its block schedule -> that schedule's blocks
-    merged = rd_df.merge(
-        bs_expanded,
-        left_on="block_schedule_id",
-        right_on="id",
-        suffixes=("_day", "_schedule"),
-        how="left",
-    )
+    if debug:
+        # These print statements are the fastest way to confirm real field
+        # names/shapes returned by your school's instance. Once you've
+        # confirmed the joins below work, you can delete this block.
+        print("--- calendar_rotation_days columns ---")
+        print(rd_df.columns.tolist())
+        print("--- rotation_days columns ---")
+        print(rot_df.columns.tolist())
+        print("--- block_schedules columns ---")
+        print(bs_df.columns.tolist())
+        print("--- blocks columns ---")
+        print(blk_df.columns.tolist())
 
-    # 4. Trim to the columns that actually matter for a printable calendar
-    keep = [c for c in [
-        "date", "rotation_id", "rotation_description",
-        "block_schedule_id", "description",
-        "block_description", "block_start_time", "block_end_time",
-    ] if c in merged.columns]
+    # 5. Join calendar day -> rotation label
+    merged = rd_df.copy()
+    if "rotation_id" in merged.columns and "id" in rot_df.columns:
+        merged = merged.merge(
+            rot_df, left_on="rotation_id", right_on="id", suffixes=("", "_rotation")
+        )
 
-    out = merged[keep].sort_values(
-        [c for c in ["date", "block_start_time"] if c in keep]
-    )
-    return out
+    # 6. Join calendar day -> block schedule -> blocks meeting on it.
+    #    NOTE: whether "blocks" links to "block_schedules" via a shared
+    #    block_schedule_id, or blocks are nested inside the block_schedule
+    #    response, depends on your school's config — check the printed
+    #    columns above and adjust this join accordingly.
+    if "block_schedule_id" in merged.columns and "block_schedule_id" in blk_df.columns:
+        merged = merged.merge(
+            blk_df, on="block_schedule_id", suffixes=("", "_block"), how="left"
+        )
+    elif "block_schedule_id" in merged.columns and "id" in bs_df.columns:
+        merged = merged.merge(
+            bs_df, left_on="block_schedule_id", right_on="id",
+            suffixes=("", "_schedule"), how="left",
+        )
+
+    return merged
 
 
 def main():
