@@ -65,6 +65,11 @@ def api_get(school_route, token, path, params=None):
         p = dict(params or {})
         p.update({"x_page_number": page, "x_page_size": 1000})
         r = requests.get(url, headers=headers, params=p)
+        if not r.ok:
+            print(f"--- API error on {url} ---")
+            print("Status:", r.status_code)
+            print("Params:", p)
+            print("Response:", r.text)
         r.raise_for_status()
         data = r.json()
         batch = data if isinstance(data, list) else data.get("data", data)
