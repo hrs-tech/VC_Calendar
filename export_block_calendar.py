@@ -34,7 +34,9 @@ SCOPES = (
     "academics.config.blocks:list "
     "academics.config.blocks:read "
     "academics.config.rotation_days:list "
-    "academics.config.rotation_days:read"
+    "academics.config.rotation_days:read "
+    "academics.config.block_times:list "
+    "academics.config.block_times:read"
 )
 
 
