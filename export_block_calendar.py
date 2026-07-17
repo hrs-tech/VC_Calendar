@@ -56,19 +56,22 @@ def get_token(school_route, client_id, client_secret, scope=SCOPES):
 
 
 def api_get(school_route, token, path, params=None):
-    """GET with pagination handled."""
+    """GET with pagination handled via X-Page-Number / X-Page-Size headers."""
     url = f"{BASE_URL.format(school_route=school_route)}{path}"
-    headers = {"Authorization": f"Bearer {token}"}
     results = []
     page = 1
     while True:
-        p = dict(params or {})
-        p.update({"x_page_number": page, "x_page_size": 1000})
-        r = requests.get(url, headers=headers, params=p)
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "X-Page-Number": str(page),
+            "X-Page-Size": "1000",
+        }
+        r = requests.get(url, headers=headers, params=params or {})
         if not r.ok:
             print(f"--- API error on {url} ---")
             print("Status:", r.status_code)
-            print("Params:", p)
+            print("Headers:", headers)
+            print("Params:", params)
             print("Response:", r.text)
         r.raise_for_status()
         data = r.json()
