@@ -87,9 +87,9 @@ def api_get(school_route, token, path, params=None):
     return results
 
 
-def build_block_calendar(school_route, token, start_date, end_date, debug=True):
+def build_block_calendar(school_route, token, start_date, end_date,
+                          school_level_prefix="US", debug=True):
     # 1. Pull every calendar rotation day in the date range
-    #    (date -> which rotation_id and/or block_schedule_id applies)
     rotation_days = api_get(
         school_route,
         token,
@@ -98,39 +98,21 @@ def build_block_calendar(school_route, token, start_date, end_date, debug=True):
     )
     rd_df = pd.DataFrame(rotation_days)
 
-    # 2. Pull rotation day definitions (id -> "A", "B", "C" label)
-    rotation_defs = api_get(school_route, token, "/academics/config/rotation_days")
-    rot_df = pd.DataFrame(rotation_defs)
-
-    # 3. Pull block schedule definitions
-    block_schedules = api_get(school_route, token, "/academics/config/block_schedules")
-    bs_df = pd.DataFrame(block_schedules)
-
-    # 4. Pull block definitions (names only — no times, per your last debug output)
-    blocks = api_get(school_route, token, "/academics/config/blocks")
-    blk_df = pd.DataFrame(blocks)
-
-    # 5. Pull block TIMES — this is where start/end times almost certainly live
+    # 2. Pull block TIMES — the actual start/end times per block, keyed to
+    #    a specific rotation_day + block_schedule (confirmed via debug output:
+    #    columns are id, block, block_schedule, rotation_day, rotation,
+    #    start_time, end_time — with block/block_schedule/rotation_day/rotation
+    #    all nested dicts).
     block_times = api_get(school_route, token, "/academics/config/block_times")
     bt_df = pd.DataFrame(block_times)
 
     if debug:
         print("--- calendar_rotation_days columns ---")
         print(rd_df.columns.tolist())
-        print("--- rotation_days columns ---")
-        print(rot_df.columns.tolist())
-        print("--- block_schedules columns ---")
-        print(bs_df.columns.tolist())
-        print("--- blocks columns ---")
-        print(blk_df.columns.tolist())
         print("--- block_times columns ---")
         print(bt_df.columns.tolist())
-        print("--- block_times sample row ---")
-        if len(bt_df) > 0:
-            print(bt_df.iloc[0].to_dict())
 
-    # 5. Flatten the nested dict columns Veracross returns inline
-    #    (rotation, day, block_schedule each come back as {'id':.., 'description':..})
+    # 3. Flatten nested dict columns on both sides
     for col in ["rotation", "day", "block_schedule"]:
         if col in rd_df.columns:
             expanded = pd.json_normalize(rd_df[col]).add_prefix(f"{col}_")
@@ -138,14 +120,39 @@ def build_block_calendar(school_route, token, start_date, end_date, debug=True):
                 [rd_df.drop(columns=[col]).reset_index(drop=True), expanded], axis=1
             )
 
-    # NOTE: we don't yet know how block_times links back to a specific
-    # calendar day (via block_schedule_id? day_id? both?), so for now we
-    # return the flattened rotation-day table only. Once we see the
-    # block_times columns/sample printed above, the final merge gets added
-    # here.
-    merged = rd_df
+    for col in ["block", "block_schedule", "rotation_day", "rotation"]:
+        if col in bt_df.columns:
+            expanded = pd.json_normalize(bt_df[col]).add_prefix(f"{col}_")
+            bt_df = pd.concat(
+                [bt_df.drop(columns=[col]).reset_index(drop=True), expanded], axis=1
+            )
 
-    return merged
+    # 4. Join: a calendar day's "day" (e.g. "US Day 1") + its block_schedule
+    #    matches block_times' "rotation_day" + "block_schedule".
+    merged = rd_df.merge(
+        bt_df,
+        left_on=["day_id", "block_schedule_id"],
+        right_on=["rotation_day_id", "block_schedule_id"],
+        suffixes=("", "_bt"),
+        how="inner",
+    )
+
+    # 5. Filter to Upper School only, using the block abbreviation prefix
+    #    (e.g. "US-CT" for Community Time). Adjust school_level_prefix if
+    #    your school uses a different convention.
+    if "block_abbreviation" in merged.columns and school_level_prefix:
+        merged = merged[
+            merged["block_abbreviation"].str.startswith(school_level_prefix, na=False)
+        ]
+
+    # 6. Trim to just what was asked for: date, block name, start, end
+    out = merged.rename(columns={"block_description": "block_name"})
+    keep = [c for c in ["date", "block_name", "start_time", "end_time"] if c in out.columns]
+    out = out[keep].sort_values(
+        [c for c in ["date", "start_time"] if c in keep]
+    ).reset_index(drop=True)
+
+    return out
 
 
 def main():
@@ -153,6 +160,11 @@ def main():
     parser.add_argument("--start", required=True, help="YYYY-MM-DD")
     parser.add_argument("--end", required=True, help="YYYY-MM-DD")
     parser.add_argument("--out", default="block_calendar.csv")
+    parser.add_argument(
+        "--school-level-prefix", default="US",
+        help='Block abbreviation prefix to filter to (e.g. "US" for Upper School). '
+             'Use "" to disable filtering and export all school levels.'
+    )
     args = parser.parse_args()
 
     school_route = os.environ["VC_SCHOOL_ROUTE"]
@@ -160,7 +172,10 @@ def main():
     client_secret = os.environ["VC_CLIENT_SECRET"]
 
     token = get_token(school_route, client_id, client_secret)
-    df = build_block_calendar(school_route, token, args.start, args.end)
+    df = build_block_calendar(
+        school_route, token, args.start, args.end,
+        school_level_prefix=args.school_level_prefix,
+    )
     df.to_csv(args.out, index=False)
     print(f"Wrote {len(df)} rows to {args.out}")
 
