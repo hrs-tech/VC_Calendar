@@ -89,10 +89,11 @@ DESCRIPTION:K–8 Back to School Night
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Parent and Guardian Welcome Reception
-DTSTART;VALUE=DATE:20260825
-DTEND;VALUE=DATE:20260825
+DTSTART;TZID=America/Los_Angeles:20260825T180000
+DTEND;TZID=America/Los_Angeles:20260825T210000
 UID:2187@veracross.headroyce
 DESCRIPTION:Parent and Guardian Welcome Reception
+LOCATION:South Campus
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
