@@ -88,6 +88,13 @@ UID:2196@veracross.headroyce
 DESCRIPTION:K–8 Back to School Night
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:K-5 Fire Drill
+DTSTART;TZID=America/Los_Angeles:20260831T134000
+DTEND;TZID=America/Los_Angeles:20260831T135500
+UID:2293@veracross.headroyce
+DESCRIPTION:K-5 Fire Drill
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Parent and Guardian Welcome Reception
 DTSTART;TZID=America/Los_Angeles:20260825T180000
 DTEND;TZID=America/Los_Angeles:20260825T210000
