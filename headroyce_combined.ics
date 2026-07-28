@@ -88,19 +88,20 @@ UID:2196@veracross.headroyce
 DESCRIPTION:K–8 Back to School Night
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K-5 Fire Drill
-DTSTART;TZID=America/Los_Angeles:20260831T134000
-DTEND;TZID=America/Los_Angeles:20260831T135500
-UID:2293@veracross.headroyce
-DESCRIPTION:K-5 Fire Drill
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Parent and Guardian Welcome Reception
 DTSTART;TZID=America/Los_Angeles:20260825T180000
 DTEND;TZID=America/Los_Angeles:20260825T210000
 UID:2187@veracross.headroyce
 DESCRIPTION:Parent and Guardian Welcome Reception
 LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Family Network Back to School Social
+DTSTART;TZID=America/Los_Angeles:20260813T170000
+DTEND;TZID=America/Los_Angeles:20260813T190000
+UID:2294@veracross.headroyce
+DESCRIPTION:Family Network Back to School Social
+LOCATION:South Campus Commons
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
