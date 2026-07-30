@@ -4,6 +4,83 @@ PRODID:-//Head-Royce Combined Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Head-Royce School
 BEGIN:VEVENT
+SUMMARY:LS Fire Drill to Blue Court
+DTSTART;TZID=America/Los_Angeles:20270604T094500
+DTEND;TZID=America/Los_Angeles:20270604T095500
+UID:2323@veracross.headroyce
+DESCRIPTION:LS Fire Drill to Blue Court
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:K-12 Fire Drill with Evacuation
+DTSTART;TZID=America/Los_Angeles:20270513T104000
+DTEND;TZID=America/Los_Angeles:20270513T111000
+UID:2322@veracross.headroyce
+DESCRIPTION:K-12 Fire Drill with Evacuation
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Fire Drill to Blue Court
+DTSTART;TZID=America/Los_Angeles:20270428T094500
+DTEND;TZID=America/Los_Angeles:20270428T095500
+UID:2321@veracross.headroyce
+DESCRIPTION:LS Fire Drill to Blue Court
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:K-12 Earthquake Drill (Drop and Cover Only)
+DTSTART;TZID=America/Los_Angeles:20270419T105000
+DTEND;TZID=America/Los_Angeles:20270419T110000
+UID:2320@veracross.headroyce
+DESCRIPTION:K-12 Earthquake Drill (Drop and Cover Only)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:K-12 Lockdown Drill
+DTSTART;TZID=America/Los_Angeles:20270329T123000
+DTEND;TZID=America/Los_Angeles:20270329T124000
+UID:2319@veracross.headroyce
+DESCRIPTION:K-12 Lockdown Drill
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:ASP Shelter-In-Place Drill
+DTSTART;TZID=America/Los_Angeles:20270325T154500
+DTEND;TZID=America/Los_Angeles:20270325T160000
+UID:2318@veracross.headroyce
+DESCRIPTION:ASP Shelter-In-Place Drill
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Fire Drill to Blue Court
+DTSTART;TZID=America/Los_Angeles:20270305T110000
+DTEND;TZID=America/Los_Angeles:20270305T110500
+UID:2317@veracross.headroyce
+DESCRIPTION:LS Fire Drill to Blue Court
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Fire Drill to Blue Court
+DTSTART;TZID=America/Los_Angeles:20270224T103000
+DTEND;TZID=America/Los_Angeles:20270224T104000
+UID:2316@veracross.headroyce
+DESCRIPTION:LS Fire Drill to Blue Court
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Earthquake Drill (Duck and Cover Only)
+DTSTART;TZID=America/Los_Angeles:20270201T105500
+DTEND;TZID=America/Los_Angeles:20270201T110000
+UID:2315@veracross.headroyce
+DESCRIPTION:LS Earthquake Drill (Duck and Cover Only)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:MS Fire Drill to Basketball Court
+DTSTART;TZID=America/Los_Angeles:20270105T091500
+DTEND;TZID=America/Los_Angeles:20270105T093000
+UID:2313@veracross.headroyce
+DESCRIPTION:MS Fire Drill to Basketball Court
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Fire Drill to Blue Court
+DTSTART;TZID=America/Los_Angeles:20270105T112000
+DTEND;TZID=America/Los_Angeles:20270105T113000
+UID:2314@veracross.headroyce
+DESCRIPTION:LS Fire Drill to Blue Court
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Holiday Program
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261218
