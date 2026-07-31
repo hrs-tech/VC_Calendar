@@ -41,13 +41,16 @@ SCOPES = (
     "academics.config.block_times:read"
 )
 
-# Middle School block names, from the Blocks list in Axiom (System homepage
-# -> Blocks). Edit this list if MS blocks are added/renamed.
-DEFAULT_MS_BLOCK_NAMES = [
-    "Morning Break",
-    "Lunch",
-    "Afternoon Break 1",
-    "Afternoon Break 2",
+# Middle School block ABBREVIATIONS, from the Blocks list in Axiom (System
+# homepage -> Blocks). Matching on abbreviation rather than description,
+# because Upper School has its own block also named "Lunch" — description
+# text isn't unique across school levels, but abbreviations are
+# (MS-LCH vs. whatever Upper School's Lunch abbreviation is).
+# Edit this list if MS blocks are added/renamed.
+DEFAULT_MS_BLOCK_ABBREVIATIONS = [
+    "MS-MBK",   # Morning Break
+    "MS-LCH",   # Lunch
+    "MS-ABK",   # Afternoon Break 1 & 2 (both share this abbreviation)
     "MS-1",
     "MS-2",
     "MS-3",
@@ -55,7 +58,7 @@ DEFAULT_MS_BLOCK_NAMES = [
     "MS-5",
     "MS-6",
     "MS-7",
-    "MS Explorations",
+    "EXP",      # MS Explorations
 ]
 
 
@@ -107,9 +110,9 @@ def api_get(school_route, token, path, params=None):
 
 
 def build_block_calendar(school_route, token, start_date, end_date,
-                          block_names=None, debug=True):
-    if block_names is None:
-        block_names = DEFAULT_MS_BLOCK_NAMES
+                          block_abbreviations=None, debug=True):
+    if block_abbreviations is None:
+        block_abbreviations = DEFAULT_MS_BLOCK_ABBREVIATIONS
 
     # 1. Pull every calendar rotation day in the date range
     rotation_days = api_get(
@@ -131,10 +134,10 @@ def build_block_calendar(school_route, token, start_date, end_date,
         print("--- block_times columns ---")
         print(bt_df.columns.tolist())
         if len(bt_df) > 0:
-            found_names = set(pd.json_normalize(bt_df["block"])["description"])
-            missing = set(block_names) - found_names
+            found_abbrevs = set(pd.json_normalize(bt_df["block"])["abbreviation"])
+            missing = set(block_abbreviations) - found_abbrevs
             if missing:
-                print(f"--- WARNING: these block names were not found in block_times: {missing} ---")
+                print(f"--- WARNING: these block abbreviations were not found in block_times: {missing} ---")
 
     # 3. Flatten nested dict columns on both sides
     for col in ["rotation", "day", "block_schedule"]:
@@ -161,9 +164,9 @@ def build_block_calendar(school_route, token, start_date, end_date,
         how="inner",
     )
 
-    # 5. Filter to the explicit Middle School block name whitelist
-    if "block_description" in merged.columns and block_names:
-        merged = merged[merged["block_description"].isin(block_names)]
+    # 5. Filter to the explicit Middle School block abbreviation whitelist
+    if "block_abbreviation" in merged.columns and block_abbreviations:
+        merged = merged[merged["block_abbreviation"].isin(block_abbreviations)]
 
     # 6. Trim to just what was asked for: date, block name, start, end
     out = merged.rename(columns={"block_description": "block_name"})
@@ -181,9 +184,9 @@ def main():
     parser.add_argument("--end", required=True, help="YYYY-MM-DD")
     parser.add_argument("--out", default="ms_block_calendar.csv")
     parser.add_argument(
-        "--block-names", default=None,
-        help="Comma-separated list of block names to include, overriding the "
-             "built-in Middle School list. E.g. 'MS-1,MS-2,Lunch'"
+        "--block-abbreviations", default=None,
+        help="Comma-separated list of block abbreviations to include, overriding "
+             "the built-in Middle School list. E.g. 'MS-1,MS-2,MS-LCH'"
     )
     args = parser.parse_args()
 
@@ -191,12 +194,14 @@ def main():
     client_id = os.environ["VC_CLIENT_ID"]
     client_secret = os.environ["VC_CLIENT_SECRET"]
 
-    block_names = args.block_names.split(",") if args.block_names else None
+    block_abbreviations = (
+        args.block_abbreviations.split(",") if args.block_abbreviations else None
+    )
 
     token = get_token(school_route, client_id, client_secret)
     df = build_block_calendar(
         school_route, token, args.start, args.end,
-        block_names=block_names,
+        block_abbreviations=block_abbreviations,
     )
     df.to_csv(args.out, index=False)
     print(f"Wrote {len(df)} rows to {args.out}")
