@@ -88,7 +88,10 @@ def api_get(school_route, token, path, params=None):
 
 
 def build_block_calendar(school_route, token, start_date, end_date,
-                          school_level_prefix="US", debug=True):
+                          school_level_prefix="US", exclude_block_names=None,
+                          debug=True):
+    if exclude_block_names is None:
+        exclude_block_names = []
     # 1. Pull every calendar rotation day in the date range
     rotation_days = api_get(
         school_route,
@@ -145,6 +148,10 @@ def build_block_calendar(school_route, token, start_date, end_date,
             merged["block_abbreviation"].str.startswith(school_level_prefix, na=False)
         ]
 
+    # 5b. Exclude any specifically unwanted block names (e.g. "US Community Time")
+    if "block_description" in merged.columns and exclude_block_names:
+        merged = merged[~merged["block_description"].isin(exclude_block_names)]
+
     # 6. Trim to just what was asked for: date, block name, start, end
     out = merged.rename(columns={"block_description": "block_name"})
     keep = [c for c in ["date", "block_name", "start_time", "end_time"] if c in out.columns]
@@ -165,16 +172,27 @@ def main():
         help='Block abbreviation prefix to filter to (e.g. "US" for Upper School). '
              'Use "" to disable filtering and export all school levels.'
     )
+    parser.add_argument(
+        "--exclude-block-names", default="US Community Time",
+        help='Comma-separated list of block names to exclude, e.g. '
+             '"US Community Time,US Assembly". Use "" to exclude nothing.'
+    )
     args = parser.parse_args()
 
     school_route = os.environ["VC_SCHOOL_ROUTE"]
     client_id = os.environ["VC_CLIENT_ID"]
     client_secret = os.environ["VC_CLIENT_SECRET"]
 
+    exclude_names = (
+        [n.strip() for n in args.exclude_block_names.split(",") if n.strip()]
+        if args.exclude_block_names else []
+    )
+
     token = get_token(school_route, client_id, client_secret)
     df = build_block_calendar(
         school_route, token, args.start, args.end,
         school_level_prefix=args.school_level_prefix,
+        exclude_block_names=exclude_names,
     )
     df.to_csv(args.out, index=False)
     print(f"Wrote {len(df)} rows to {args.out}")
