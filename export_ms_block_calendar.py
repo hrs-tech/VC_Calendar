@@ -38,9 +38,7 @@ SCOPES = (
     "academics.config.rotation_days:list "
     "academics.config.rotation_days:read "
     "academics.config.block_times:list "
-    "academics.config.block_times:read "
-    "academics.config.block_groups:list "
-    "academics.config.block_groups:read"
+    "academics.config.block_times:read"
 )
 
 # Middle School block ABBREVIATIONS, from the Blocks list in Axiom (System
@@ -137,34 +135,35 @@ def build_block_calendar(school_route, token, start_date, end_date,
     bt_df = pd.DataFrame(block_times)
 
     if debug:
-        # --- INVESTIGATION: does the blocks/block_groups API expose the
-        # "Applies To" / "Block Groups" fields visible in Axiom's UI? ---
-        blocks_raw = api_get(school_route, token, "/academics/config/blocks")
-        print("--- RAW blocks sample record (all fields) ---")
-        if blocks_raw:
-            print(blocks_raw[0])
-
-        try:
-            block_groups_raw = api_get(school_route, token, "/academics/config/block_groups")
-            print("--- block_groups columns ---")
-            print(pd.DataFrame(block_groups_raw).columns.tolist())
-            print("--- block_groups sample record ---")
-            if block_groups_raw:
-                print(block_groups_raw[0])
-        except Exception as e:
-            print(f"--- block_groups fetch failed: {e} ---")
-        # --- END INVESTIGATION ---
-
-    if debug:
         print("--- calendar_rotation_days columns ---")
         print(rd_df.columns.tolist())
         print("--- block_times columns ---")
         print(bt_df.columns.tolist())
         if len(bt_df) > 0:
-            found_abbrevs = set(pd.json_normalize(bt_df["block"])["abbreviation"])
+            block_info = pd.json_normalize(bt_df["block"])
+            found_abbrevs = set(block_info["abbreviation"])
+
+            # Forward check: anything on our whitelist that's missing entirely
+            # from this year's schedule (e.g. it exists as a block definition
+            # but isn't currently scheduled — not necessarily an error).
             missing = set(block_abbreviations) - found_abbrevs
             if missing:
-                print(f"--- WARNING: these block abbreviations were not found in block_times: {missing} ---")
+                print(f"--- INFO: these whitelisted abbreviations have no scheduled occurrences: {missing} ---")
+
+            # Reverse check: anything scheduled that LOOKS like Middle School
+            # (abbreviation starts with "MS", or description contains "MS")
+            # but isn't on our whitelist yet. This is how a future addition
+            # like MS-8 gets caught automatically instead of silently
+            # dropped.
+            ms_like = block_info[
+                block_info["abbreviation"].str.startswith("MS", na=False)
+                | block_info["description"].str.contains("MS", na=False)
+            ]
+            unaccounted = set(ms_like["abbreviation"]) - set(block_abbreviations)
+            if unaccounted:
+                print(f"--- WARNING: possible new Middle School blocks not in whitelist: {unaccounted} ---")
+                print("    Add these to DEFAULT_MS_BLOCK_ABBREVIATIONS if they belong, "
+                      "or ignore if they're actually Upper School (e.g. name coincidence).")
 
     # 3. Flatten nested dict columns on both sides
     for col in ["rotation", "day", "block_schedule"]:
