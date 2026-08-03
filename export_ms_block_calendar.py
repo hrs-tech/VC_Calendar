@@ -38,7 +38,9 @@ SCOPES = (
     "academics.config.rotation_days:list "
     "academics.config.rotation_days:read "
     "academics.config.block_times:list "
-    "academics.config.block_times:read"
+    "academics.config.block_times:read "
+    "academics.config.block_groups:list "
+    "academics.config.block_groups:read"
 )
 
 # Middle School block ABBREVIATIONS, from the Blocks list in Axiom (System
@@ -58,6 +60,12 @@ DEFAULT_MS_BLOCK_ABBREVIATIONS = [
     "MS-5",
     "MS-6",
     "MS-7",
+    "MS-8",
+    "MS-MCI",   # MS Morning Check-In
+    "MS-ASM",   # MS-Assembly
+    "MS-OH",    # MS Office Hours — NOTE: no "Applies To"/Block Group tag in
+                # Axiom like the others; confirm this is meant to be MS-only
+                # before relying on it being complete.
     "EXP",      # MS Explorations
 ]
 
@@ -127,6 +135,25 @@ def build_block_calendar(school_route, token, start_date, end_date,
     #    specific rotation_day + block_schedule.
     block_times = api_get(school_route, token, "/academics/config/block_times")
     bt_df = pd.DataFrame(block_times)
+
+    if debug:
+        # --- INVESTIGATION: does the blocks/block_groups API expose the
+        # "Applies To" / "Block Groups" fields visible in Axiom's UI? ---
+        blocks_raw = api_get(school_route, token, "/academics/config/blocks")
+        print("--- RAW blocks sample record (all fields) ---")
+        if blocks_raw:
+            print(blocks_raw[0])
+
+        try:
+            block_groups_raw = api_get(school_route, token, "/academics/config/block_groups")
+            print("--- block_groups columns ---")
+            print(pd.DataFrame(block_groups_raw).columns.tolist())
+            print("--- block_groups sample record ---")
+            if block_groups_raw:
+                print(block_groups_raw[0])
+        except Exception as e:
+            print(f"--- block_groups fetch failed: {e} ---")
+        # --- END INVESTIGATION ---
 
     if debug:
         print("--- calendar_rotation_days columns ---")
