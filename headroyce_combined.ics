@@ -95,43 +95,6 @@ UID:2197@veracross.headroyce
 DESCRIPTION:Tuition Assistance Webinar for Current Families
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K–8 Back to School Night
-DTSTART;VALUE=DATE:20260903
-DTEND;VALUE=DATE:20260903
-UID:2196@veracross.headroyce
-DESCRIPTION:K–8 Back to School Night
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Parent and Guardian Welcome Reception
-DTSTART;TZID=America/Los_Angeles:20260825T180000
-DTEND;TZID=America/Los_Angeles:20260825T210000
-UID:2187@veracross.headroyce
-DESCRIPTION:Parent and Guardian Welcome Reception
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:New Middle School Family Orientation
-DTSTART;TZID=America/Los_Angeles:20260814T090000
-DTEND;TZID=America/Los_Angeles:20260814T120000
-UID:2325@veracross.headroyce
-DESCRIPTION:New Middle School Family Orientation
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:9th Grade Family Orientation
-DTSTART;TZID=America/Los_Angeles:20260814T090000
-DTEND;TZID=America/Los_Angeles:20260814T120000
-UID:2326@veracross.headroyce
-DESCRIPTION:9th Grade Family Orientation
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Family Network Back to School Social
-DTSTART;TZID=America/Los_Angeles:20260813T170000
-DTEND;TZID=America/Los_Angeles:20260813T190000
-UID:2294@veracross.headroyce
-DESCRIPTION:Family Network Back to School Social
-LOCATION:South Campus Commons
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Independence Day
 DTSTART;VALUE=DATE:20270705
 DTEND;VALUE=DATE:20270705
@@ -235,20 +198,6 @@ DTSTART;VALUE=DATE:20260907
 DTEND;VALUE=DATE:20260907
 UID:2127@veracross.headroyce
 DESCRIPTION:Labor Day
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Independence Day Observation
-DTSTART;VALUE=DATE:20260703
-DTEND;VALUE=DATE:20260703
-UID:2126@veracross.headroyce
-DESCRIPTION:Independence Day Observation
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:First Day of School
-DTSTART;VALUE=DATE:20260817
-DTEND;VALUE=DATE:20260817
-UID:2157@veracross.headroyce
-DESCRIPTION:First Day of School
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Last Day of School
