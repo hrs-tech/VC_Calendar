@@ -95,11 +95,12 @@ UID:2197@veracross.headroyce
 DESCRIPTION:Tuition Assistance Webinar for Current Families
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K–8 Back to School Night
-DTSTART;VALUE=DATE:20260903
-DTEND;VALUE=DATE:20260903
-UID:2196@veracross.headroyce
-DESCRIPTION:K–8 Back to School Night
+SUMMARY:Parent and Guardian Welcome Reception
+DTSTART;TZID=America/Los_Angeles:20260825T180000
+DTEND;TZID=America/Los_Angeles:20260825T210000
+UID:2187@veracross.headroyce
+DESCRIPTION:Parent and Guardian Welcome Reception
+LOCATION:South Campus
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:New Middle School Family Orientation
