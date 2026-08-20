@@ -82,6 +82,14 @@ DESCRIPTION:Parent and Guardian Welcome Reception
 LOCATION:South Campus
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:US Athletics Fall Parent/Coach Meeting
+DTSTART;TZID=America/Los_Angeles:20260820T190000
+DTEND;TZID=America/Los_Angeles:20260820T203000
+UID:2879@veracross.headroyce
+DESCRIPTION:US Athletics Fall Parent/Coach Meeting
+LOCATION:Gym
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:New Middle School Family Orientation
 DTSTART;TZID=America/Los_Angeles:20260814T090000
 DTEND;TZID=America/Los_Angeles:20260814T100000
