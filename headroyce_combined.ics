@@ -67,6 +67,13 @@ UID:2198@veracross.headroyce
 DESCRIPTION:Makeup Picture Day
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Upper School Back to School Night
+DTSTART;TZID=America/Los_Angeles:20260910T170000
+DTEND;TZID=America/Los_Angeles:20260910T190000
+UID:2242@veracross.headroyce
+DESCRIPTION:Upper School Back to School Night
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:K–8 Back to School Night
 DTSTART;TZID=America/Los_Angeles:20260903T170000
 DTEND;TZID=America/Los_Angeles:20260903T190000
@@ -79,7 +86,7 @@ DTSTART;TZID=America/Los_Angeles:20260825T180000
 DTEND;TZID=America/Los_Angeles:20260825T210000
 UID:2187@veracross.headroyce
 DESCRIPTION:Parent and Guardian Welcome Reception
-LOCATION:South Campus
+LOCATION:South Campus\, The Crystal Land Commons
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:US Athletics Fall Parent/Coach Meeting
