@@ -89,6 +89,14 @@ DESCRIPTION:Parent and Guardian Welcome Reception
 LOCATION:South Campus\, The Crystal Land Commons
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:US Athletics - Fall Season Parent-Coach Meeting
+DTSTART;TZID=America/Los_Angeles:20260820T190000
+DTEND;TZID=America/Los_Angeles:20260820T203000
+UID:2890@veracross.headroyce
+DESCRIPTION:US Athletics - Fall Season Parent-Coach Meeting
+LOCATION:North Campus\, M\, M-101 (Gym)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:US Athletics Fall Parent/Coach Meeting
 DTSTART;TZID=America/Los_Angeles:20260820T190000
 DTEND;TZID=America/Los_Angeles:20260820T203000
