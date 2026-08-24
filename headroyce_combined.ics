@@ -4,6 +4,20 @@ PRODID:-//Head-Royce Combined Calendar//EN
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Head-Royce School
 BEGIN:VEVENT
+SUMMARY:Middle School Promotion
+DTSTART;TZID=America/Los_Angeles:20270611T100000
+DTEND;TZID=America/Los_Angeles:20270611T120000
+UID:2344@veracross.headroyce
+DESCRIPTION:Middle School Promotion
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Lower School Promotion
+DTSTART;TZID=America/Los_Angeles:20270610T100000
+DTEND;TZID=America/Los_Angeles:20270610T120000
+UID:2340@veracross.headroyce
+DESCRIPTION:Lower School Promotion
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
 DTSTART;TZID=America/Los_Angeles:20270320T190000
 DTEND;TZID=America/Los_Angeles:20270320T210000
@@ -87,13 +101,6 @@ DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K–8 Open House
-DTSTART;TZID=America/Los_Angeles:20261025T130000
-DTEND;TZID=America/Los_Angeles:20261025T150000
-UID:2201@veracross.headroyce
-DESCRIPTION:K–8 Open House
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:All School Fair
 DTSTART;TZID=America/Los_Angeles:20260925T170000
 DTEND;TZID=America/Los_Angeles:20260925T190000
@@ -117,7 +124,7 @@ END:VEVENT
 BEGIN:VEVENT
 SUMMARY:K–8 Back to School Night
 DTSTART;TZID=America/Los_Angeles:20260903T170000
-DTEND;TZID=America/Los_Angeles:20260903T190000
+DTEND;TZID=America/Los_Angeles:20260903T200000
 UID:2196@veracross.headroyce
 DESCRIPTION:K–8 Back to School Night
 END:VEVENT
@@ -398,6 +405,20 @@ DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260914
 UID:2144@veracross.headroyce
 DESCRIPTION:Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Upper School Open House
+DTSTART;TZID=America/Los_Angeles:20261101T130000
+DTEND;TZID=America/Los_Angeles:20261101T150000
+UID:2247@veracross.headroyce
+DESCRIPTION:Upper School Open House
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:K–8 Open House
+DTSTART;TZID=America/Los_Angeles:20261025T130000
+DTEND;TZID=America/Los_Angeles:20261025T150000
+UID:2201@veracross.headroyce
+DESCRIPTION:K–8 Open House
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Coast to Coast: College Admissions Event
