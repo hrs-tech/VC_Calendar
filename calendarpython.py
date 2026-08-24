@@ -80,8 +80,9 @@ def build_ics(all_events):
             vevent.add("dtend", tz.localize(
                 datetime.strptime(f"{end_str} {end_time}", "%Y-%m-%d %H:%M:%S")))
         else:
+            from datetime import timedelta
             vevent.add("dtstart", date.fromisoformat(start_str))
-            vevent.add("dtend",   date.fromisoformat(end_str))
+            vevent.add("dtend",   date.fromisoformat(end_str) + timedelta(days=1))
 
         if ev.get("description"):
             vevent.add("description", ev["description"])
