@@ -12,10 +12,19 @@ DESCRIPTION:US Spring Musical Performance
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
-DTSTART;VALUE=DATE:20270311
-DTEND;VALUE=DATE:20270313
-UID:2327@veracross.headroyce
+DTSTART;TZID=America/Los_Angeles:20270318T190000
+DTEND;TZID=America/Los_Angeles:20270318T210000
+UID:7278@veracross.headroyce
 DESCRIPTION:US Spring Musical Performance
+LOCATION:North Campus\, C\, C-101 (MEW)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:US Spring Musical Performance (Matinee)
+DTSTART;TZID=America/Los_Angeles:20270313T140000
+DTEND;TZID=America/Los_Angeles:20270313T210000
+UID:7276@veracross.headroyce
+DESCRIPTION:US Spring Musical Performance (Matinee)
+LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Nia Speaker Series
@@ -32,18 +41,19 @@ UID:2202@veracross.headroyce
 DESCRIPTION:Holiday Program
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Fall Choral\, Instrumental\, and Dance Concert
-DTSTART;VALUE=DATE:20261119
-DTEND;VALUE=DATE:20261119
-UID:2190@veracross.headroyce
-DESCRIPTION:Fall Choral\, Instrumental\, and Dance Concert
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Candle Light Choral Concert
 DTSTART;TZID=America/Los_Angeles:20261029T173000
 DTEND;TZID=America/Los_Angeles:20261029T203000
 UID:2192@veracross.headroyce
 DESCRIPTION:Candle Light Choral Concert
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Candlelight Choral Concert
+DTSTART;TZID=America/Los_Angeles:20261028T173000
+DTEND;TZID=America/Los_Angeles:20261028T203000
+UID:7215@veracross.headroyce
+DESCRIPTION:Candlelight Choral Concert
+LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:K–8 Open House
@@ -79,6 +89,14 @@ DTSTART;TZID=America/Los_Angeles:20260903T170000
 DTEND;TZID=America/Los_Angeles:20260903T190000
 UID:2196@veracross.headroyce
 DESCRIPTION:K–8 Back to School Night
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:US Special Dual  9th and 10th Grade Level Assembly
+DTSTART;TZID=America/Los_Angeles:20260828T094500
+DTEND;TZID=America/Los_Angeles:20260828T102500
+UID:7272@veracross.headroyce
+DESCRIPTION:US Special Dual  9th and 10th Grade Level Assembly
+LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Parent and Guardian Welcome Reception
@@ -342,5 +360,13 @@ DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260913
 UID:2144@veracross.headroyce
 DESCRIPTION:Rosh Hashanah
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Coast to Coast: College Admissions Event
+DTSTART;TZID=America/Los_Angeles:20261011T160000
+DTEND;TZID=America/Los_Angeles:20261011T180000
+UID:2881@veracross.headroyce
+DESCRIPTION:Coast to Coast: College Admissions Event
+LOCATION:North Campus\, D\, D-224 (Community Room)
 END:VEVENT
 END:VCALENDAR
