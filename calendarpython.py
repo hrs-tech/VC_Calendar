@@ -13,7 +13,7 @@ SCHOOL_ROUTE  = os.environ["VC_SCHOOL_ROUTE"]
 
 # Event types to pull — use the exact string values from your Veracross value list
 # e.g. "All School", "Upper School", "Athletics", "Arts", etc.
-EVENT_TYPES = [8, 5, 90, 91, 106]  # integers, and updated to match what's actually in your data
+EVENT_TYPES = [8, 5, 90, 91, 106, 24]  # integers, and updated to match what's actually in your data
 DATE_FROM = "2026-08-01"
 DATE_TO   = "2027-06-30"  # extended to cover the 2026-27 school year
 
