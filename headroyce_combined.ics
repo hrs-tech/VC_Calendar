@@ -49,27 +49,12 @@ DESCRIPTION:US Spring Musical Performance
 LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:US Spring Musical Performance (Matinee)
-DTSTART;TZID=America/Los_Angeles:20270313T140000
-DTEND;TZID=America/Los_Angeles:20270313T210000
-UID:7276@veracross.headroyce
-DESCRIPTION:US Spring Musical Performance (Matinee)
-LOCATION:North Campus\, C\, C-101 (MEW)
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
 DTSTART;TZID=America/Los_Angeles:20270312T190000
 DTEND;TZID=America/Los_Angeles:20270312T210000
 UID:7274@veracross.headroyce
 DESCRIPTION:US Spring Musical Performance
 LOCATION:North Campus\, C\, C-101 (MEW)
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Spring Musical Performance
-DTSTART;TZID=America/Los_Angeles:20270311T190000
-DTEND;TZID=America/Los_Angeles:20270311T210000
-UID:2327@veracross.headroyce
-DESCRIPTION:US Spring Musical Performance
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Nia Speaker Series
