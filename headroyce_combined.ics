@@ -35,13 +35,6 @@ LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
-DTSTART;VALUE=DATE:20270318
-DTEND;VALUE=DATE:20270321
-UID:2328@veracross.headroyce
-DESCRIPTION:US Spring Musical Performance
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Spring Musical Performance
 DTSTART;TZID=America/Los_Angeles:20270318T190000
 DTEND;TZID=America/Los_Angeles:20270318T210000
 UID:7278@veracross.headroyce
@@ -86,81 +79,6 @@ DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:All School Fair
-DTSTART;TZID=America/Los_Angeles:20260925T170000
-DTEND;TZID=America/Los_Angeles:20260925T190000
-UID:2199@veracross.headroyce
-DESCRIPTION:All School Fair
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Makeup Picture Day
-DTSTART;TZID=America/Los_Angeles:20260911T000000
-DTEND;TZID=America/Los_Angeles:20260911T235900
-UID:2198@veracross.headroyce
-DESCRIPTION:Makeup Picture Day
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Upper School Back to School Night
-DTSTART;TZID=America/Los_Angeles:20260910T170000
-DTEND;TZID=America/Los_Angeles:20260910T190000
-UID:2242@veracross.headroyce
-DESCRIPTION:Upper School Back to School Night
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:K–8 Back to School Night
-DTSTART;TZID=America/Los_Angeles:20260903T170000
-DTEND;TZID=America/Los_Angeles:20260903T200000
-UID:2196@veracross.headroyce
-DESCRIPTION:K–8 Back to School Night
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Special Dual  9th and 10th Grade Level Assembly
-DTSTART;TZID=America/Los_Angeles:20260828T094500
-DTEND;TZID=America/Los_Angeles:20260828T102500
-UID:7272@veracross.headroyce
-DESCRIPTION:US Special Dual  9th and 10th Grade Level Assembly
-LOCATION:North Campus\, C\, C-101 (MEW)
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Parent and Guardian Welcome Reception
-DTSTART;TZID=America/Los_Angeles:20260825T180000
-DTEND;TZID=America/Los_Angeles:20260825T210000
-UID:2187@veracross.headroyce
-DESCRIPTION:Parent and Guardian Welcome Reception
-LOCATION:South Campus\, The Crystal Land Commons
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Athletics - Fall Season Parent-Coach Meeting
-DTSTART;TZID=America/Los_Angeles:20260820T190000
-DTEND;TZID=America/Los_Angeles:20260820T203000
-UID:2890@veracross.headroyce
-DESCRIPTION:US Athletics - Fall Season Parent-Coach Meeting
-LOCATION:North Campus\, M\, M-101 (Gym)
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Athletics Fall Parent/Coach Meeting
-DTSTART;TZID=America/Los_Angeles:20260820T190000
-DTEND;TZID=America/Los_Angeles:20260820T203000
-UID:2879@veracross.headroyce
-DESCRIPTION:US Athletics Fall Parent/Coach Meeting
-LOCATION:Gym
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:New Middle School Family Orientation
-DTSTART;TZID=America/Los_Angeles:20260814T090000
-DTEND;TZID=America/Los_Angeles:20260814T100000
-UID:2325@veracross.headroyce
-DESCRIPTION:New Middle School Family Orientation
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Family Network Back to School Social
-DTSTART;TZID=America/Los_Angeles:20260813T170000
-DTEND;TZID=America/Los_Angeles:20260813T190000
-UID:2294@veracross.headroyce
-DESCRIPTION:Family Network Back to School Social
-LOCATION:South Campus Commons
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Independence Day
 DTSTART;VALUE=DATE:20270705
 DTEND;VALUE=DATE:20270706
@@ -196,18 +114,18 @@ UID:2139@veracross.headroyce
 DESCRIPTION:Farmworkers Day
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Presidents Day
-DTSTART;VALUE=DATE:20270215
-DTEND;VALUE=DATE:20270216
-UID:2138@veracross.headroyce
-DESCRIPTION:Presidents Day
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:February Break
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270220
 UID:2155@veracross.headroyce
 DESCRIPTION:February Break
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Presidents Day
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+UID:2138@veracross.headroyce
+DESCRIPTION:Presidents Day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:MLK Jr. Day 
@@ -264,27 +182,6 @@ DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
 UID:2128@veracross.headroyce
 DESCRIPTION:Indigenous Peoples Day
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Labor Day
-DTSTART;VALUE=DATE:20260907
-DTEND;VALUE=DATE:20260908
-UID:2127@veracross.headroyce
-DESCRIPTION:Labor Day
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Independence Day Observation
-DTSTART;VALUE=DATE:20260703
-DTEND;VALUE=DATE:20260704
-UID:2126@veracross.headroyce
-DESCRIPTION:Independence Day Observation
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:First Day of School
-DTSTART;VALUE=DATE:20260817
-DTEND;VALUE=DATE:20260818
-UID:2157@veracross.headroyce
-DESCRIPTION:First Day of School
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Last Day of School
@@ -376,20 +273,6 @@ DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
 UID:2129@veracross.headroyce
 DESCRIPTION:Diwali
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Yom Kippur
-DTSTART;VALUE=DATE:20260920
-DTEND;VALUE=DATE:20260922
-UID:2145@veracross.headroyce
-DESCRIPTION:Yom Kippur
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Rosh Hashanah
-DTSTART;VALUE=DATE:20260911
-DTEND;VALUE=DATE:20260914
-UID:2144@veracross.headroyce
-DESCRIPTION:Rosh Hashanah
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Upper School Open House
