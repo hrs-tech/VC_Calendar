@@ -64,6 +64,14 @@ UID:2202@veracross.headroyce
 DESCRIPTION:Holiday Program
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Grandfriends Day
+DTSTART;TZID=America/Los_Angeles:20261120T113000
+DTEND;TZID=America/Los_Angeles:20261120T140000
+UID:2204@veracross.headroyce
+DESCRIPTION:Grandfriends Day
+LOCATION:North Campus
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Candle Light Choral Concert
 DTSTART;TZID=America/Los_Angeles:20261029T173000
 DTEND;TZID=America/Los_Angeles:20261029T203000
@@ -77,6 +85,14 @@ DTEND;TZID=America/Los_Angeles:20261028T203000
 UID:7215@veracross.headroyce
 DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:K–8 Open House
+DTSTART;TZID=America/Los_Angeles:20261025T130000
+DTEND;TZID=America/Los_Angeles:20261025T150000
+UID:2201@veracross.headroyce
+DESCRIPTION:K–8 Open House
+LOCATION:North Campus
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
@@ -280,13 +296,7 @@ DTSTART;TZID=America/Los_Angeles:20261101T130000
 DTEND;TZID=America/Los_Angeles:20261101T150000
 UID:2247@veracross.headroyce
 DESCRIPTION:Upper School Open House
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:K–8 Open House
-DTSTART;TZID=America/Los_Angeles:20261025T130000
-DTEND;TZID=America/Los_Angeles:20261025T150000
-UID:2201@veracross.headroyce
-DESCRIPTION:K–8 Open House
+LOCATION:North Campus
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Coast to Coast: College Admissions Event
