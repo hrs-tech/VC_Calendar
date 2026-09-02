@@ -87,12 +87,20 @@ DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K–8 Open House
-DTSTART;TZID=America/Los_Angeles:20261025T130000
-DTEND;TZID=America/Los_Angeles:20261025T150000
-UID:2201@veracross.headroyce
-DESCRIPTION:K–8 Open House
-LOCATION:North Campus
+SUMMARY:New Family Welcome: How We Thrive Together
+DTSTART;TZID=America/Los_Angeles:20261002T084500
+DTEND;TZID=America/Los_Angeles:20261002T094500
+UID:7342@veracross.headroyce
+DESCRIPTION:New Family Welcome: How We Thrive Together
+LOCATION:Virtual
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:New Family Welcome: How We Thrive Together
+DTSTART;TZID=America/Los_Angeles:20260930T084500
+DTEND;TZID=America/Los_Angeles:20260930T094500
+UID:7341@veracross.headroyce
+DESCRIPTION:New Family Welcome: How We Thrive Together
+LOCATION:South Campus\, Teaching Gardens
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
@@ -289,21 +297,5 @@ DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
 UID:2129@veracross.headroyce
 DESCRIPTION:Diwali
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Upper School Open House
-DTSTART;TZID=America/Los_Angeles:20261101T130000
-DTEND;TZID=America/Los_Angeles:20261101T150000
-UID:2247@veracross.headroyce
-DESCRIPTION:Upper School Open House
-LOCATION:North Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Coast to Coast: College Admissions Event
-DTSTART;TZID=America/Los_Angeles:20261011T160000
-DTEND;TZID=America/Los_Angeles:20261011T180000
-UID:2881@veracross.headroyce
-DESCRIPTION:Coast to Coast: College Admissions Event
-LOCATION:North Campus\, D\, D-224 (Community Room)
 END:VEVENT
 END:VCALENDAR
