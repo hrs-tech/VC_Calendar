@@ -161,7 +161,7 @@ def get_explorations_rows(school_route, token, start_date, end_date,
     # or differently-shaped "course" value, which breaks a blanket
     # json_normalize (that's what caused the earlier KeyError: 'description').
     course_desc = classes_df["course"].apply(
-        lambda c: c.get("description") if isinstance(c, dict)
+        lambda c: c.get("course_name") if isinstance(c, dict)
         else (c if isinstance(c, str) else None)
     )
 
@@ -169,7 +169,7 @@ def get_explorations_rows(school_route, token, start_date, end_date,
         print("--- distinct course names found in classes ---")
         print(sorted(course_desc.dropna().unique().tolist()))
 
-    matches = classes_df[course_desc == course_name]
+    matches = classes_df[course_desc.str.contains(course_name, case=False, na=False)]
 
     if len(matches) == 0 and "description" in classes_df.columns:
         # Fallback: maybe the course name shows up in the class's own
