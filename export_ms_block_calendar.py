@@ -5,9 +5,16 @@ Exports a full-year, day-by-day list of every Middle School Block that
 meets on every school day, with start/end times.
 
 Unlike the Upper School version, Middle School blocks don't all follow a
-consistent abbreviation prefix (e.g. "MS Explorations" is abbreviated
-"EXP", not "MS-EXP"), so this filters by an explicit whitelist of block
-descriptions instead of a prefix match.
+consistent abbreviation prefix, so this filters by an explicit whitelist
+of block abbreviations instead of a prefix match.
+
+SPECIAL CASE — MS Explorations: this block has NO entries in the
+block_times configuration table at all (confirmed via diagnostic). Its
+actual schedule instead comes from the individual "Explorations" course
+sections' Class Meeting Times, a separate API resource keyed to specific
+classes rather than the generic block-schedule template. So this script
+fetches it via a second code path (get_explorations_rows) and merges the
+result in alongside everything else.
 
 Requires: requests, pandas
     pip install requests pandas --break-system-packages
@@ -38,7 +45,11 @@ SCOPES = (
     "academics.config.rotation_days:list "
     "academics.config.rotation_days:read "
     "academics.config.block_times:list "
-    "academics.config.block_times:read"
+    "academics.config.block_times:read "
+    "academics.classes:list "
+    "academics.classes:read "
+    "academics.classes.meeting_times:list "
+    "academics.classes.meeting_times:read"
 )
 
 # Middle School block ABBREVIATIONS, from the Blocks list in Axiom (System
@@ -47,6 +58,10 @@ SCOPES = (
 # text isn't unique across school levels, but abbreviations are
 # (MS-LCH vs. whatever Upper School's Lunch abbreviation is).
 # Edit this list if MS blocks are added/renamed.
+#
+# NOTE: "MS Explorations" (abbreviation MS-EXP) is deliberately NOT in
+# this list — it has zero rows in block_times, so it's fetched separately
+# via get_explorations_rows() and merged in afterward.
 DEFAULT_MS_BLOCK_ABBREVIATIONS = [
     "MS-MBK",   # Morning Break
     "MS-LCH",   # Lunch
@@ -64,8 +79,11 @@ DEFAULT_MS_BLOCK_ABBREVIATIONS = [
     "MS-OH",    # MS Office Hours — NOTE: no "Applies To"/Block Group tag in
                 # Axiom like the others; confirm this is meant to be MS-only
                 # before relying on it being complete.
-    "EXP",      # MS Explorations
 ]
+
+# The course name to look up in /academics/classes to find all
+# Explorations sections. Update if the course gets renamed.
+EXPLORATIONS_COURSE_NAME = "Explorations"
 
 
 def get_token(school_route, client_id, client_secret, scope=SCOPES):
@@ -115,6 +133,71 @@ def api_get(school_route, token, path, params=None):
     return results
 
 
+def get_explorations_rows(school_route, token, start_date, end_date,
+                           course_name=EXPLORATIONS_COURSE_NAME, debug=True):
+    """
+    Fetch actual meeting occurrences for the Explorations block via
+    class-level Class Meeting Times, since this block has no entries in
+    the block_times configuration table.
+
+    Returns a DataFrame with columns: date, block_name, start_time, end_time
+    — same shape as the block_times-derived rows, de-duplicated across
+    the multiple Explorations sections that share the same time slot.
+    """
+    all_classes = api_get(school_route, token, "/academics/classes")
+    classes_df = pd.DataFrame(all_classes)
+
+    if len(classes_df) == 0 or "course" not in classes_df.columns:
+        if debug:
+            print("--- WARNING: no classes returned, or 'course' column missing; "
+                  "skipping Explorations ---")
+        return pd.DataFrame(columns=["date", "block_name", "start_time", "end_time"])
+
+    course_info = pd.json_normalize(classes_df["course"])
+    matches = classes_df[course_info["description"] == course_name]
+
+    if debug:
+        print(f"--- found {len(matches)} classes for course '{course_name}' ---")
+
+    if len(matches) == 0:
+        return pd.DataFrame(columns=["date", "block_name", "start_time", "end_time"])
+
+    all_rows = []
+    for internal_id in matches["id"]:
+        rows = api_get(school_route, token, f"/academics/classes/{internal_id}/meeting_times")
+        all_rows.extend(rows)
+
+    if not all_rows:
+        if debug:
+            print(f"--- WARNING: 0 meeting time rows found for '{course_name}' classes ---")
+        return pd.DataFrame(columns=["date", "block_name", "start_time", "end_time"])
+
+    mt_df = pd.DataFrame(all_rows)
+
+    # block is a nested dict like {'id':16,'description':'MS Explorations',...}
+    block_info = pd.json_normalize(mt_df["block"])
+    mt_df["block_name"] = block_info["description"]
+
+    # start_time/end_time come back as full ISO timestamps
+    # (e.g. "1900-01-01T14:30:00Z") — extract just HH:MM.
+    mt_df["start_time"] = mt_df["start_time"].str.slice(11, 16)
+    mt_df["end_time"] = mt_df["end_time"].str.slice(11, 16)
+
+    # Restrict to the requested date range (dates are "YYYY-MM-DD" strings,
+    # which sort/compare correctly as strings).
+    mt_df = mt_df[(mt_df["date"] >= start_date) & (mt_df["date"] <= end_date)]
+
+    # De-duplicate: multiple sections meeting at the same time on the same
+    # date should produce one row, not one per section.
+    out = mt_df[["date", "block_name", "start_time", "end_time"]].drop_duplicates()
+
+    if debug:
+        print(f"--- {len(out)} unique Explorations occurrences after de-duplication "
+              f"(from {len(mt_df)} raw section-level rows) ---")
+
+    return out.reset_index(drop=True)
+
+
 def build_block_calendar(school_route, token, start_date, end_date,
                           block_abbreviations=None, debug=True):
     if block_abbreviations is None:
@@ -143,27 +226,6 @@ def build_block_calendar(school_route, token, start_date, end_date,
         print(f"--- block_times: {len(bt_df)} rows fetched (raw, unfiltered) ---")
 
         if len(bt_df) > 0:
-            # DIAGNOSTIC: is EXP present in block_times at all, under ANY
-            # block_schedule, before any joins/filters happen?
-            block_info_raw = pd.json_normalize(bt_df["block"])
-            exp_mask = block_info_raw["abbreviation"] == "EXP"
-            print(f"--- EXP diagnostic: {exp_mask.sum()} raw block_times rows for EXP ---")
-            if exp_mask.sum() > 0:
-                exp_rows = bt_df[exp_mask.values]
-                schedule_info = pd.json_normalize(exp_rows["block_schedule"])
-                rotation_day_info = pd.json_normalize(exp_rows["rotation_day"])
-                print("--- EXP block_schedule(s) found:", schedule_info["description"].unique().tolist(), "---")
-                print("--- EXP rotation_day(s) found:", rotation_day_info["description"].unique().tolist(), "---")
-
-            # DIAGNOSTIC: what block_schedules actually appear across the
-            # requested calendar date range? If EXP's block_schedule above
-            # never appears here, that's why it drops out of the join.
-            if "block_schedule" in rd_df.columns:
-                rd_schedule_info = pd.json_normalize(rd_df["block_schedule"])
-                print("--- block_schedule(s) present in calendar_rotation_days for this date range:",
-                      rd_schedule_info["description"].unique().tolist(), "---")
-
-        if len(bt_df) > 0:
             block_info = pd.json_normalize(bt_df["block"])
             found_abbrevs = set(block_info["abbreviation"])
 
@@ -183,7 +245,7 @@ def build_block_calendar(school_route, token, start_date, end_date,
                 block_info["abbreviation"].str.startswith("MS", na=False)
                 | block_info["description"].str.contains("MS", na=False)
             ]
-            unaccounted = set(ms_like["abbreviation"]) - set(block_abbreviations)
+            unaccounted = set(ms_like["abbreviation"]) - set(block_abbreviations) - {"MS-EXP"}
             if unaccounted:
                 print(f"--- WARNING: possible new Middle School blocks not in whitelist: {unaccounted} ---")
                 print("    Add these to DEFAULT_MS_BLOCK_ABBREVIATIONS if they belong, "
@@ -218,13 +280,19 @@ def build_block_calendar(school_route, token, start_date, end_date,
     if "block_abbreviation" in merged.columns and block_abbreviations:
         merged = merged[merged["block_abbreviation"].isin(block_abbreviations)]
 
-    # 6. Trim to just what was asked for, sort chronologically, then rename
-    #    to the CSV header format requested (matches Google Calendar's
-    #    CSV import column names/order).
+    # 6. Trim to just what was asked for
     out = merged.rename(columns={"block_description": "block_name"})
     keep = [c for c in ["date", "block_name", "start_time", "end_time"] if c in out.columns]
-    out = out[keep].sort_values(
-        [c for c in ["date", "start_time"] if c in keep]
+    out = out[keep]
+
+    # 7. Merge in Explorations rows (sourced separately — see module docstring)
+    exp_rows = get_explorations_rows(school_route, token, start_date, end_date, debug=debug)
+    out = pd.concat([out, exp_rows], ignore_index=True)
+
+    # 8. Sort chronologically, then rename to the CSV header format
+    #    requested (matches Google Calendar's CSV import column names/order).
+    out = out.sort_values(
+        [c for c in ["date", "start_time"] if c in out.columns]
     ).reset_index(drop=True)
 
     out = out.rename(columns={
