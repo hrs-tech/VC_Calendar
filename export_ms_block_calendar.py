@@ -153,8 +153,18 @@ def get_explorations_rows(school_route, token, start_date, end_date,
                   "skipping Explorations ---")
         return pd.DataFrame(columns=["date", "block_name", "start_time", "end_time"])
 
-    course_info = pd.json_normalize(classes_df["course"])
-    matches = classes_df[course_info["description"] == course_name]
+    # Extract course description defensively — some rows may have a null
+    # or differently-shaped "course" value, which breaks a blanket
+    # json_normalize (that's what caused the earlier KeyError: 'description').
+    course_desc = classes_df["course"].apply(
+        lambda c: c.get("description") if isinstance(c, dict) else None
+    )
+
+    if debug:
+        print("--- distinct course names found in classes ---")
+        print(sorted(course_desc.dropna().unique().tolist()))
+
+    matches = classes_df[course_desc == course_name]
 
     if debug:
         print(f"--- found {len(matches)} classes for course '{course_name}' ---")
