@@ -125,24 +125,32 @@ def main():
     if len(exp_classes) == 0:
         return
 
-    # 2. Pull meeting times, then filter to just these classes' internal IDs.
-    all_meeting_times = api_get(school_route, token, "/academics/classes/meeting_times")
-    mt_df = pd.DataFrame(all_meeting_times)
-
-    print("--- class_meeting_times columns ---")
-    print(mt_df.columns.tolist())
-    if len(mt_df) > 0:
-        print("--- class_meeting_times sample record ---")
-        print(mt_df.iloc[0].to_dict())
-
+    # 2. Meeting times are nested under a specific class ID
+    #    (/academics/classes/{id}/meeting_times), not a flat listable
+    #    collection — confirmed by the prior 400 error when we tried it
+    #    as a flat path.
     id_col = "id" if "id" in exp_classes.columns else None
-    if id_col and "class_id" in mt_df.columns:
-        exp_internal_ids = set(exp_classes[id_col])
-        matched_mt = mt_df[mt_df["class_id"].isin(exp_internal_ids)]
-        print(f"--- {len(matched_mt)} meeting time rows found for Explorations classes ---")
-        print(matched_mt)
-    else:
-        print("--- Could not auto-match meeting times to classes — inspect columns above manually ---")
+    if not id_col:
+        print("--- Could not find internal 'id' column on classes — inspect manually ---")
+        return
+
+    all_rows = []
+    for internal_id, class_id_label in zip(exp_classes["id"], exp_classes["class_id"]):
+        rows = api_get(school_route, token, f"/academics/classes/{internal_id}/meeting_times")
+        for row in rows:
+            row["_class_id"] = class_id_label
+            row["_internal_class_id"] = internal_id
+        all_rows.extend(rows)
+
+    mt_df = pd.DataFrame(all_rows)
+    print("--- class meeting_times columns ---")
+    print(mt_df.columns.tolist())
+    print(f"--- {len(mt_df)} total meeting time rows across all 9 Explorations classes ---")
+    if len(mt_df) > 0:
+        print("--- sample record ---")
+        print(mt_df.iloc[0].to_dict())
+        print("--- full table ---")
+        print(mt_df)
 
 
 if __name__ == "__main__":
