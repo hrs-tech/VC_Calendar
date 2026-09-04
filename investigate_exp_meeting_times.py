@@ -34,8 +34,8 @@ BASE_URL = "https://api.veracross.com/{school_route}/v3"
 SCOPES = (
     "academics.classes:list "
     "academics.classes:read "
-    "academics.class_meeting_times:list "
-    "academics.class_meeting_times:read"
+    "academics.classes.meeting_times:list "
+    "academics.classes.meeting_times:read"
 )
 
 # The specific Explorations sections, from your Class ID list in Axiom.
@@ -126,7 +126,7 @@ def main():
         return
 
     # 2. Pull meeting times, then filter to just these classes' internal IDs.
-    all_meeting_times = api_get(school_route, token, "/academics/class_meeting_times")
+    all_meeting_times = api_get(school_route, token, "/academics/classes/meeting_times")
     mt_df = pd.DataFrame(all_meeting_times)
 
     print("--- class_meeting_times columns ---")
