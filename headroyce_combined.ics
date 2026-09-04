@@ -18,6 +18,14 @@ UID:2340@veracross.headroyce
 DESCRIPTION:Lower School Promotion
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Caravan Jazz and Colla Voce at Yoshi
+DTSTART;TZID=America/Los_Angeles:20270503T200000
+DTEND;TZID=America/Los_Angeles:20270503T220000
+UID:2379@veracross.headroyce
+DESCRIPTION:Caravan Jazz and Colla Voce at Yoshi
+LOCATION:Yoshi's jazz club
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
 DTSTART;TZID=America/Los_Angeles:20270320T190000
 DTEND;TZID=America/Los_Angeles:20270320T210000
@@ -64,6 +72,13 @@ UID:2202@veracross.headroyce
 DESCRIPTION:Holiday Program
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:K-12 Preliminary Application Form and Fee Due
+DTSTART;TZID=America/Los_Angeles:20261204T000000
+DTEND;TZID=America/Los_Angeles:20261205T000000
+UID:7365@veracross.headroyce
+DESCRIPTION:K-12 Preliminary Application Form and Fee Due
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Grandfriends Day
 DTSTART;TZID=America/Los_Angeles:20261120T113000
 DTEND;TZID=America/Los_Angeles:20261120T140000
@@ -87,20 +102,20 @@ DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Lower School Assembly
+DTSTART;TZID=America/Los_Angeles:20261002T084000
+DTEND;TZID=America/Los_Angeles:20261002T092000
+UID:7361@veracross.headroyce
+DESCRIPTION:Lower School Assembly
+LOCATION:North Campus\, D\, D-224 (Community Room)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:New Family Welcome: How We Thrive Together
 DTSTART;TZID=America/Los_Angeles:20261002T084500
 DTEND;TZID=America/Los_Angeles:20261002T094500
 UID:7342@veracross.headroyce
 DESCRIPTION:New Family Welcome: How We Thrive Together
 LOCATION:Virtual
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:New Family Welcome: How We Thrive Together
-DTSTART;TZID=America/Los_Angeles:20260930T084500
-DTEND;TZID=America/Los_Angeles:20260930T094500
-UID:7341@veracross.headroyce
-DESCRIPTION:New Family Welcome: How We Thrive Together
-LOCATION:South Campus\, Teaching Gardens
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
