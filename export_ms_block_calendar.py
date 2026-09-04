@@ -137,8 +137,32 @@ def build_block_calendar(school_route, token, start_date, end_date,
     if debug:
         print("--- calendar_rotation_days columns ---")
         print(rd_df.columns.tolist())
+        print(f"--- calendar_rotation_days: {len(rd_df)} rows fetched ---")
         print("--- block_times columns ---")
         print(bt_df.columns.tolist())
+        print(f"--- block_times: {len(bt_df)} rows fetched (raw, unfiltered) ---")
+
+        if len(bt_df) > 0:
+            # DIAGNOSTIC: is EXP present in block_times at all, under ANY
+            # block_schedule, before any joins/filters happen?
+            block_info_raw = pd.json_normalize(bt_df["block"])
+            exp_mask = block_info_raw["abbreviation"] == "EXP"
+            print(f"--- EXP diagnostic: {exp_mask.sum()} raw block_times rows for EXP ---")
+            if exp_mask.sum() > 0:
+                exp_rows = bt_df[exp_mask.values]
+                schedule_info = pd.json_normalize(exp_rows["block_schedule"])
+                rotation_day_info = pd.json_normalize(exp_rows["rotation_day"])
+                print("--- EXP block_schedule(s) found:", schedule_info["description"].unique().tolist(), "---")
+                print("--- EXP rotation_day(s) found:", rotation_day_info["description"].unique().tolist(), "---")
+
+            # DIAGNOSTIC: what block_schedules actually appear across the
+            # requested calendar date range? If EXP's block_schedule above
+            # never appears here, that's why it drops out of the join.
+            if "block_schedule" in rd_df.columns:
+                rd_schedule_info = pd.json_normalize(rd_df["block_schedule"])
+                print("--- block_schedule(s) present in calendar_rotation_days for this date range:",
+                      rd_schedule_info["description"].unique().tolist(), "---")
+
         if len(bt_df) > 0:
             block_info = pd.json_normalize(bt_df["block"])
             found_abbrevs = set(block_info["abbreviation"])
@@ -194,12 +218,23 @@ def build_block_calendar(school_route, token, start_date, end_date,
     if "block_abbreviation" in merged.columns and block_abbreviations:
         merged = merged[merged["block_abbreviation"].isin(block_abbreviations)]
 
-    # 6. Trim to just what was asked for: date, block name, start, end
+    # 6. Trim to just what was asked for, sort chronologically, then rename
+    #    to the CSV header format requested (matches Google Calendar's
+    #    CSV import column names/order).
     out = merged.rename(columns={"block_description": "block_name"})
     keep = [c for c in ["date", "block_name", "start_time", "end_time"] if c in out.columns]
     out = out[keep].sort_values(
         [c for c in ["date", "start_time"] if c in keep]
     ).reset_index(drop=True)
+
+    out = out.rename(columns={
+        "date": "Start Date",
+        "block_name": "Subject",
+        "start_time": "Start Time",
+        "end_time": "End Time",
+    })
+    column_order = [c for c in ["Start Date", "Subject", "Start Time", "End Time"] if c in out.columns]
+    out = out[column_order]
 
     return out
 
