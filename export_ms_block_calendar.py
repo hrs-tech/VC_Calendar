@@ -309,7 +309,11 @@ def build_block_calendar(school_route, token, start_date, end_date,
         ms_like_in_range = merged[
             merged["block_abbreviation"].str.startswith("MS", na=False)
         ]
-        unaccounted = set(ms_like_in_range["block_abbreviation"]) - set(block_abbreviations) - {"MS-EXP"}
+        unaccounted = set(ms_like_in_range["block_abbreviation"]) - set(block_abbreviations) - {
+            "MS-EXP",   # handled separately via get_explorations_rows()
+            "MS-F",     # confirmed in Axiom: description "MS-UNUSED" — legacy/unused
+            "MS-G",     # confirmed in Axiom: description "MS-UNUSED" — legacy/unused
+        }
         if unaccounted:
             print(f"--- WARNING: possible new Middle School blocks not in whitelist "
                   f"(actually occurring in {start_date} to {end_date}): {unaccounted} ---")
