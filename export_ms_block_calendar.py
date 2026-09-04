@@ -79,6 +79,9 @@ DEFAULT_MS_BLOCK_ABBREVIATIONS = [
     "MS-OH",    # MS Office Hours — NOTE: no "Applies To"/Block Group tag in
                 # Axiom like the others; confirm this is meant to be MS-only
                 # before relying on it being complete.
+    "MS-Adv",   # MS Advising (Squeeze)
+    "MS-AC",    # MS AA/Clubs
+    "MS-JB",    # MS Jazz Band
 ]
 
 # The course name to look up in /academics/classes to find all
@@ -265,21 +268,11 @@ def build_block_calendar(school_route, token, start_date, end_date,
             missing = set(block_abbreviations) - found_abbrevs
             if missing:
                 print(f"--- INFO: these whitelisted abbreviations have no scheduled occurrences: {missing} ---")
-
-            # Reverse check: anything scheduled that LOOKS like Middle School
-            # (abbreviation starts with "MS", or description contains "MS")
-            # but isn't on our whitelist yet. This is how a future addition
-            # like MS-8 gets caught automatically instead of silently
-            # dropped.
-            ms_like = block_info[
-                block_info["abbreviation"].str.startswith("MS", na=False)
-                | block_info["description"].str.contains("MS", na=False)
-            ]
-            unaccounted = set(ms_like["abbreviation"]) - set(block_abbreviations) - {"MS-EXP"}
-            if unaccounted:
-                print(f"--- WARNING: possible new Middle School blocks not in whitelist: {unaccounted} ---")
-                print("    Add these to DEFAULT_MS_BLOCK_ABBREVIATIONS if they belong, "
-                      "or ignore if they're actually Upper School (e.g. name coincidence).")
+            # (Reverse check for unaccounted MS-like blocks now runs after
+            # the join below, scoped to the actual date range — block_times
+            # itself isn't date-filtered and can include stale/historical
+            # entries from prior years' configurations, which produced
+            # false-positive warnings here.)
 
     # 3. Flatten nested dict columns on both sides
     for col in ["rotation", "day", "block_schedule"]:
@@ -305,6 +298,22 @@ def build_block_calendar(school_route, token, start_date, end_date,
         suffixes=("", "_bt"),
         how="inner",
     )
+
+    # 4b. Reverse check, scoped to the actual date range: anything that
+    #     occurs in this window and LOOKS like Middle School (abbreviation
+    #     starts with "MS") but isn't on our whitelist yet. Running this
+    #     after the join — rather than against raw, unfiltered block_times —
+    #     avoids false positives from stale/historical block_times entries
+    #     that don't belong to any currently-scheduled day.
+    if debug and "block_abbreviation" in merged.columns:
+        ms_like_in_range = merged[
+            merged["block_abbreviation"].str.startswith("MS", na=False)
+        ]
+        unaccounted = set(ms_like_in_range["block_abbreviation"]) - set(block_abbreviations) - {"MS-EXP"}
+        if unaccounted:
+            print(f"--- WARNING: possible new Middle School blocks not in whitelist "
+                  f"(actually occurring in {start_date} to {end_date}): {unaccounted} ---")
+            print("    Add these to DEFAULT_MS_BLOCK_ABBREVIATIONS if they belong.")
 
     # 5. Filter to the explicit Middle School block abbreviation whitelist
     if "block_abbreviation" in merged.columns and block_abbreviations:
