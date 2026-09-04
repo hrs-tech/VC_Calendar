@@ -153,11 +153,16 @@ def get_explorations_rows(school_route, token, start_date, end_date,
                   "skipping Explorations ---")
         return pd.DataFrame(columns=["date", "block_name", "start_time", "end_time"])
 
+    if debug:
+        sample_course_val = classes_df["course"].dropna().iloc[0] if classes_df["course"].notna().any() else None
+        print(f"--- raw 'course' field sample: type={type(sample_course_val)}, value={sample_course_val!r} ---")
+
     # Extract course description defensively — some rows may have a null
     # or differently-shaped "course" value, which breaks a blanket
     # json_normalize (that's what caused the earlier KeyError: 'description').
     course_desc = classes_df["course"].apply(
-        lambda c: c.get("description") if isinstance(c, dict) else None
+        lambda c: c.get("description") if isinstance(c, dict)
+        else (c if isinstance(c, str) else None)
     )
 
     if debug:
@@ -165,6 +170,21 @@ def get_explorations_rows(school_route, token, start_date, end_date,
         print(sorted(course_desc.dropna().unique().tolist()))
 
     matches = classes_df[course_desc == course_name]
+
+    if len(matches) == 0 and "description" in classes_df.columns:
+        # Fallback: maybe the course name shows up in the class's own
+        # description field instead (e.g. "Explorations - GW").
+        if debug:
+            print("--- no matches via 'course' field; trying class 'description' field instead ---")
+            candidates = classes_df[
+                classes_df["description"].str.contains(course_name, case=False, na=False)
+            ]
+            print(f"--- classes whose description contains '{course_name}': {len(candidates)} ---")
+            if len(candidates) > 0:
+                print(candidates[["id", "class_id", "description"]])
+        matches = classes_df[
+            classes_df["description"].str.contains(course_name, case=False, na=False)
+        ]
 
     if debug:
         print(f"--- found {len(matches)} classes for course '{course_name}' ---")
