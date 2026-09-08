@@ -18,6 +18,13 @@ UID:2340@veracross.headroyce
 DESCRIPTION:Lower School Promotion
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:NOSCHL: Faculty Workday: No School K–12
+DTSTART;TZID=America/Los_Angeles:20270510T120000
+DTEND;TZID=America/Los_Angeles:20270511T000000
+UID:7375@veracross.headroyce
+DESCRIPTION:NOSCHL: Faculty Workday: No School K–12
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Caravan Jazz and Colla Voce at Yoshi
 DTSTART;TZID=America/Los_Angeles:20270503T200000
 DTEND;TZID=America/Los_Angeles:20270503T220000
@@ -26,12 +33,26 @@ DESCRIPTION:Caravan Jazz and Colla Voce at Yoshi
 LOCATION:Yoshi's jazz club
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:NOSCHL: Faculty Workday: No School K–12
+DTSTART;TZID=America/Los_Angeles:20270322T120000
+DTEND;TZID=America/Los_Angeles:20270323T000000
+UID:7374@veracross.headroyce
+DESCRIPTION:NOSCHL: Faculty Workday: No School K–12
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
 DTSTART;TZID=America/Los_Angeles:20270320T190000
 DTEND;TZID=America/Los_Angeles:20270320T210000
 UID:7281@veracross.headroyce
 DESCRIPTION:US Spring Musical Performance
 LOCATION:North Campus\, C\, C-101 (MEW)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Faculty Workday: No School K–5
+DTSTART;TZID=America/Los_Angeles:20270319T000000
+DTEND;TZID=America/Los_Angeles:20270320T000000
+UID:7373@veracross.headroyce
+DESCRIPTION:LS Faculty Workday: No School K–5
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:US Spring Musical Performance
@@ -65,6 +86,13 @@ UID:2474@veracross.headroyce
 DESCRIPTION:Nia Speaker Series
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:NOSCHL: Faculty Workday: No School K–12
+DTSTART;TZID=America/Los_Angeles:20270104T000000
+DTEND;TZID=America/Los_Angeles:20270105T000000
+UID:7372@veracross.headroyce
+DESCRIPTION:NOSCHL: Faculty Workday: No School K–12
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Holiday Program
 DTSTART;TZID=America/Los_Angeles:20261218T100000
 DTEND;TZID=America/Los_Angeles:20261218T120000
@@ -85,6 +113,13 @@ DTEND;TZID=America/Los_Angeles:20261120T140000
 UID:2204@veracross.headroyce
 DESCRIPTION:Grandfriends Day
 LOCATION:North Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:NOSCHL: Faculty Workday: No School K–12
+DTSTART;TZID=America/Los_Angeles:20261102T000000
+DTEND;TZID=America/Los_Angeles:20261103T000000
+UID:7371@veracross.headroyce
+DESCRIPTION:NOSCHL: Faculty Workday: No School K–12
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Candle Light Choral Concert
