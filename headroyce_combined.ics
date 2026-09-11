@@ -137,20 +137,19 @@ DESCRIPTION:Candlelight Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Indigenous Peoples' Day
+DTSTART;TZID=America/Los_Angeles:20261012T120000
+DTEND;TZID=America/Los_Angeles:20261013T000000
+UID:7399@veracross.headroyce
+DESCRIPTION:Indigenous Peoples' Day
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Lower School Assembly
 DTSTART;TZID=America/Los_Angeles:20261002T084000
 DTEND;TZID=America/Los_Angeles:20261002T092000
 UID:7361@veracross.headroyce
 DESCRIPTION:Lower School Assembly
 LOCATION:North Campus\, D\, D-224 (Community Room)
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:New Family Welcome: How We Thrive Together
-DTSTART;TZID=America/Los_Angeles:20261002T084500
-DTEND;TZID=America/Los_Angeles:20261002T094500
-UID:7342@veracross.headroyce
-DESCRIPTION:New Family Welcome: How We Thrive Together
-LOCATION:Virtual
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
@@ -227,6 +226,13 @@ SUMMARY:November Break
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261128
 UID:2131@veracross.headroyce
+DESCRIPTION:November Break
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:November Break
+DTSTART;TZID=America/Los_Angeles:20261123T000000
+DTEND;TZID=America/Los_Angeles:20261128T000000
+UID:7400@veracross.headroyce
 DESCRIPTION:November Break
 END:VEVENT
 BEGIN:VEVENT
