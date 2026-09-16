@@ -33,6 +33,14 @@ DESCRIPTION:Caravan Jazz and Colla Voce at Yoshi
 LOCATION:Yoshi's jazz club
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:K-12 Parents and Guardians Coffee and Tea
+DTSTART;TZID=America/Los_Angeles:20270416T084500
+DTEND;TZID=America/Los_Angeles:20270416T094500
+UID:7415@veracross.headroyce
+DESCRIPTION:K-12 Parents and Guardians Coffee and Tea
+LOCATION:South Campus\, R\, R-101 (Collaboratory Space)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:NOSCHL: Faculty Workday: No School K–12
 DTSTART;TZID=America/Los_Angeles:20270322T120000
 DTEND;TZID=America/Los_Angeles:20270322T000000
@@ -102,7 +110,7 @@ END:VEVENT
 BEGIN:VEVENT
 SUMMARY:K-12 Preliminary Application Form and Fee Due
 DTSTART;TZID=America/Los_Angeles:20261204T000000
-DTEND;TZID=America/Los_Angeles:20261205T000000
+DTEND;TZID=America/Los_Angeles:20261204T235900
 UID:7365@veracross.headroyce
 DESCRIPTION:K-12 Preliminary Application Form and Fee Due
 END:VEVENT
@@ -129,19 +137,20 @@ UID:2192@veracross.headroyce
 DESCRIPTION:Candle Light Choral Concert
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Candlelight Choral Concert
+SUMMARY:Candle Light Choral Concert
 DTSTART;TZID=America/Los_Angeles:20261028T173000
 DTEND;TZID=America/Los_Angeles:20261028T203000
 UID:7215@veracross.headroyce
-DESCRIPTION:Candlelight Choral Concert
+DESCRIPTION:Candle Light Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Indigenous Peoples' Day
-DTSTART;VALUE=DATE:20261012
-DTEND;VALUE=DATE:20261014
-UID:7399@veracross.headroyce
-DESCRIPTION:Indigenous Peoples' Day
+SUMMARY:Fall Play Rehearsal
+DTSTART;TZID=America/Los_Angeles:20261009T153000
+DTEND;TZID=America/Los_Angeles:20261009T173000
+UID:7424@veracross.headroyce
+DESCRIPTION:Fall Play Rehearsal
+LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
@@ -249,13 +258,6 @@ UID:2189@veracross.headroyce
 DESCRIPTION:Faculty Workday: No School K–12
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Indigenous Peoples Day
-DTSTART;VALUE=DATE:20261012
-DTEND;VALUE=DATE:20261013
-UID:2128@veracross.headroyce
-DESCRIPTION:Indigenous Peoples Day
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Last Day of School
 DTSTART;VALUE=DATE:20270609
 DTEND;VALUE=DATE:20270610
@@ -345,5 +347,37 @@ DTSTART;VALUE=DATE:20261108
 DTEND;VALUE=DATE:20261109
 UID:2129@veracross.headroyce
 DESCRIPTION:Diwali
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Parent/Guardian Tour
+DTSTART;TZID=America/Los_Angeles:20261013T100000
+DTEND;TZID=America/Los_Angeles:20261013T111500
+UID:7426@veracross.headroyce
+DESCRIPTION:LS Parent/Guardian Tour
+LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:MS Parent/Guardian Tour
+DTSTART;TZID=America/Los_Angeles:20261009T084500
+DTEND;TZID=America/Los_Angeles:20261009T101500
+UID:7423@veracross.headroyce
+DESCRIPTION:MS Parent/Guardian Tour
+LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:US Parent/Guardian Tour
+DTSTART;TZID=America/Los_Angeles:20261008T103000
+DTEND;TZID=America/Los_Angeles:20261008T121500
+UID:7421@veracross.headroyce
+DESCRIPTION:US Parent/Guardian Tour
+LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LS Parent/Guardian Tour
+DTSTART;TZID=America/Los_Angeles:20261006T100000
+DTEND;TZID=America/Los_Angeles:20261006T111500
+UID:2254@veracross.headroyce
+DESCRIPTION:LS Parent/Guardian Tour
+LOCATION:South Campus
 END:VEVENT
 END:VCALENDAR
