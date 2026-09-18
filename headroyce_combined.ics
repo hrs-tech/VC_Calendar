@@ -153,12 +153,12 @@ DESCRIPTION:Candle Light Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K–8 Open House
-DTSTART;TZID=America/Los_Angeles:20261025T130000
-DTEND;TZID=America/Los_Angeles:20261025T153000
-UID:2201@veracross.headroyce
-DESCRIPTION:K–8 Open House
-LOCATION:North Campus\, L\, Amphitheater
+SUMMARY:K-8 Parent Ed: The Data Story\, Part 1
+DTSTART;TZID=America/Los_Angeles:20261027T090000
+DTEND;TZID=America/Los_Angeles:20261027T103000
+UID:7484@veracross.headroyce
+DESCRIPTION:K-8 Parent Ed: The Data Story\, Part 1
+LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Independence Day
@@ -252,20 +252,6 @@ UID:2130@veracross.headroyce
 DESCRIPTION:Veterans Day
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Faculty Workday: No School K–12
-DTSTART;VALUE=DATE:20261019
-DTEND;VALUE=DATE:20261020
-UID:7288@veracross.headroyce
-DESCRIPTION:Faculty Workday: No School K–12
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Faculty Workday: No School K–12
-DTSTART;VALUE=DATE:20261016
-DTEND;VALUE=DATE:20261017
-UID:2189@veracross.headroyce
-DESCRIPTION:Faculty Workday: No School K–12
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Last Day of School
 DTSTART;VALUE=DATE:20270609
 DTEND;VALUE=DATE:20270610
@@ -357,6 +343,14 @@ UID:2129@veracross.headroyce
 DESCRIPTION:Diwali
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Admitted Families Day
+DTSTART;TZID=America/Los_Angeles:20270314T130000
+DTEND;TZID=America/Los_Angeles:20270314T150000
+UID:7480@veracross.headroyce
+DESCRIPTION:Admitted Families Day
+LOCATION:South Campus\, R\, R-101 (Collaboratory Space)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Board of Trustees Meeting #5
 DTSTART;TZID=America/Los_Angeles:20270310T170000
 DTEND;TZID=America/Los_Angeles:20270310T200000
@@ -402,62 +396,6 @@ DTSTART;TZID=America/Los_Angeles:20261026T103000
 DTEND;TZID=America/Los_Angeles:20261026T121500
 UID:7444@veracross.headroyce
 DESCRIPTION:US Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:US Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261022T103000
-DTEND;TZID=America/Los_Angeles:20261022T121500
-UID:7443@veracross.headroyce
-DESCRIPTION:US Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:MS Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261021T084500
-DTEND;TZID=America/Los_Angeles:20261021T101500
-UID:7442@veracross.headroyce
-DESCRIPTION:MS Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:LS Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261020T100000
-DTEND;TZID=America/Los_Angeles:20261020T111500
-UID:7441@veracross.headroyce
-DESCRIPTION:LS Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:MS Community Engagement Day
-DTSTART;TZID=America/Los_Angeles:20261014T083000
-DTEND;TZID=America/Los_Angeles:20261014T151500
-UID:7448@veracross.headroyce
-DESCRIPTION:MS Community Engagement Day
-LOCATION:Various Locations
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:LS Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261014T100000
-DTEND;TZID=America/Los_Angeles:20261014T111500
-UID:7440@veracross.headroyce
-DESCRIPTION:LS Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:LS Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261013T100000
-DTEND;TZID=America/Los_Angeles:20261013T111500
-UID:7426@veracross.headroyce
-DESCRIPTION:LS Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:MS Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261009T084500
-DTEND;TZID=America/Los_Angeles:20261009T101500
-UID:7423@veracross.headroyce
-DESCRIPTION:MS Parent/Guardian Tour
 LOCATION:South Campus
 END:VEVENT
 END:VCALENDAR
