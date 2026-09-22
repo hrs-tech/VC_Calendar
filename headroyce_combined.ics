@@ -116,13 +116,6 @@ UID:2202@veracross.headroyce
 DESCRIPTION:Holiday Program
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K-12 Preliminary Application Form and Fee Due
-DTSTART;TZID=America/Los_Angeles:20261204T000000
-DTEND;TZID=America/Los_Angeles:20261204T235900
-UID:7365@veracross.headroyce
-DESCRIPTION:K-12 Preliminary Application Form and Fee Due
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Grandfriends Day
 DTSTART;TZID=America/Los_Angeles:20261120T113000
 DTEND;TZID=America/Los_Angeles:20261120T140000
@@ -375,6 +368,13 @@ DESCRIPTION:Board of Trustees Meeting #3
 LOCATION:North Campus\, J\, J-201 (Library Main)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:K-12 Preliminary Application Form and Fee Due
+DTSTART;TZID=America/Los_Angeles:20261204T000000
+DTEND;TZID=America/Los_Angeles:20261204T235900
+UID:7365@veracross.headroyce
+DESCRIPTION:K-12 Preliminary Application Form and Fee Due
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Upper School Open House
 DTSTART;TZID=America/Los_Angeles:20261101T130000
 DTEND;TZID=America/Los_Angeles:20261101T153000
@@ -383,19 +383,27 @@ DESCRIPTION:Upper School Open House
 LOCATION:North Campus\, L\, Amphitheater
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:LS Parent/Guardian Tour
+SUMMARY:Lower School Parent/Guardian Tour
 DTSTART;TZID=America/Los_Angeles:20261028T100000
 DTEND;TZID=America/Los_Angeles:20261028T111500
 UID:7446@veracross.headroyce
-DESCRIPTION:LS Parent/Guardian Tour
+DESCRIPTION:Lower School Parent/Guardian Tour
 LOCATION:South Campus
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:US Parent/Guardian Tour
+SUMMARY:Upper School Parent/Guardian Tour
 DTSTART;TZID=America/Los_Angeles:20261026T103000
 DTEND;TZID=America/Los_Angeles:20261026T121500
 UID:7444@veracross.headroyce
-DESCRIPTION:US Parent/Guardian Tour
+DESCRIPTION:Upper School Parent/Guardian Tour
 LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Lower and Middle School Open House
+DTSTART;TZID=America/Los_Angeles:20261025T130000
+DTEND;TZID=America/Los_Angeles:20261025T153000
+UID:2201@veracross.headroyce
+DESCRIPTION:Lower and Middle School Open House
+LOCATION:North Campus\, L\, Amphitheater
 END:VEVENT
 END:VCALENDAR
