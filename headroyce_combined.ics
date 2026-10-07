@@ -87,6 +87,13 @@ DESCRIPTION:US Spring Musical Performance
 LOCATION:North Campus\, C\, C-101 (MEW)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:February Break
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270220
+UID:8312@veracross.headroyce
+DESCRIPTION:February Break
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Nia Speaker Series
 DTSTART;TZID=America/Los_Angeles:20270205T180000
 DTEND;TZID=America/Los_Angeles:20270205T200000
@@ -146,11 +153,11 @@ DESCRIPTION:Candle Light Choral Concert
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:K-8 Parent Ed: The Data Story\, Part 1
+SUMMARY:K–8 Parent/Guardian Ed: The Data Story\, Part 1
 DTSTART;TZID=America/Los_Angeles:20261027T090000
 DTEND;TZID=America/Los_Angeles:20261027T103000
 UID:7484@veracross.headroyce
-DESCRIPTION:K-8 Parent Ed: The Data Story\, Part 1
+DESCRIPTION:K–8 Parent/Guardian Ed: The Data Story\, Part 1
 LOCATION:South Campus\, P\, Hawks Nest
 END:VEVENT
 BEGIN:VEVENT
@@ -187,13 +194,6 @@ DTSTART;VALUE=DATE:20270331
 DTEND;VALUE=DATE:20270401
 UID:2139@veracross.headroyce
 DESCRIPTION:Farmworkers Day
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:February Break
-DTSTART;VALUE=DATE:20270215
-DTEND;VALUE=DATE:20270220
-UID:2155@veracross.headroyce
-DESCRIPTION:February Break
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Presidents Day
@@ -357,14 +357,6 @@ DTSTART;TZID=America/Los_Angeles:20270120T170000
 DTEND;TZID=America/Los_Angeles:20270120T200000
 UID:7434@veracross.headroyce
 DESCRIPTION:Board of Trustees Meeting #4
-LOCATION:North Campus\, J\, J-201 (Library Main)
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Board of Trustees Meeting #3
-DTSTART;TZID=America/Los_Angeles:20261209T170000
-DTEND;TZID=America/Los_Angeles:20261209T200000
-UID:7433@veracross.headroyce
-DESCRIPTION:Board of Trustees Meeting #3
 LOCATION:North Campus\, J\, J-201 (Library Main)
 END:VEVENT
 BEGIN:VEVENT
