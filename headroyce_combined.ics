@@ -131,6 +131,14 @@ DESCRIPTION:Grandfriends Day
 LOCATION:North Campus
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Kindergarten Literacy Group
+DTSTART;TZID=America/Los_Angeles:20261105T090000
+DTEND;TZID=America/Los_Angeles:20261105T094500
+UID:8334@veracross.headroyce
+DESCRIPTION:Kindergarten Literacy Group
+LOCATION:ASP Room
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:NOSCHL: Faculty Workday: No School K–12
 DTSTART;TZID=America/Los_Angeles:20261102T000000
 DTEND;TZID=America/Los_Angeles:20261102T000000
@@ -143,6 +151,13 @@ DTSTART;TZID=America/Los_Angeles:20261029T173000
 DTEND;TZID=America/Los_Angeles:20261029T203000
 UID:2192@veracross.headroyce
 DESCRIPTION:Candle Light Choral Concert
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Givetober
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261101
+UID:8327@veracross.headroyce
+DESCRIPTION:Givetober
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Candle Light Choral Concert
@@ -367,6 +382,14 @@ UID:7365@veracross.headroyce
 DESCRIPTION:K-12 Preliminary Application Form and Fee Due
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Middle School Parent/Guardian Tour
+DTSTART;TZID=America/Los_Angeles:20261104T084500
+DTEND;TZID=America/Los_Angeles:20261104T101500
+UID:8332@veracross.headroyce
+DESCRIPTION:Middle School Parent/Guardian Tour
+LOCATION:South Campus
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Upper School Open House
 DTSTART;TZID=America/Los_Angeles:20261101T130000
 DTEND;TZID=America/Los_Angeles:20261101T153000
@@ -381,21 +404,5 @@ DTEND;TZID=America/Los_Angeles:20261028T111500
 UID:7446@veracross.headroyce
 DESCRIPTION:Lower School Parent/Guardian Tour
 LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Upper School Parent/Guardian Tour
-DTSTART;TZID=America/Los_Angeles:20261026T103000
-DTEND;TZID=America/Los_Angeles:20261026T121500
-UID:7444@veracross.headroyce
-DESCRIPTION:Upper School Parent/Guardian Tour
-LOCATION:South Campus
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Lower and Middle School Open House
-DTSTART;TZID=America/Los_Angeles:20261025T130000
-DTEND;TZID=America/Los_Angeles:20261025T153000
-UID:2201@veracross.headroyce
-DESCRIPTION:Lower and Middle School Open House
-LOCATION:North Campus\, L\, Amphitheater
 END:VEVENT
 END:VCALENDAR
